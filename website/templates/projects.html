@@ -1,0 +1,27 @@
+{% extends 'details.html' %}
+{% load static %}
+{% block title %}
+<title>Projects</title>
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="main-container">
+        <h2 style="text-align: center;margin-bottom: 20px;">All my projects</h2>
+        <div class="post-wrapper">
+            {% for project in projects %}
+            <div>
+                <div class="post">
+                    <img class="thumbnail" src="{{project.imageURL}}" alt="">
+                    <div class="post-preview">
+                        <h6 class="post-title">{{project.title}}</h6>
+                        <p class="post-intro">{{project.info}}</p>
+                        <a class="btn btn-outline-dark" href="{% url 'portfolio:details' project.id %}">Read More..</a>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+{% endblock %}

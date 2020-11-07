@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block title %}
+    <title>{{project}}</title>
+{% endblock %}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link id="theme-style" rel="stylesheet" type="text/css" href="">
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="nav-wrapper">
+        <div class="dots-wrapper">
+            <div id='dot-1' class="browser-dot"></div>
+            <div id='dot-2' class="browser-dot"></div>
+            <div id='dot-3' class="browser-dot"></div>
+
+        </div>
+        <ul id="navigation">
+            <li><a href="{% url 'portfolio:index' %}"> Home </a></li>
+
+        </ul>
+    </div>
+    <br>
+    <div>
+        <a class="btn btn-outline-dark" style="margin: 10px;width: 90px;;margin-bottom: 0px;" href="{% url 'portfolio:index' %}">&#8592;Back</a>
+    </div>
+{% block content %}
+
+    <div class="main-container" style="text-align: center;padding: 10px;">
+
+        <h2>{{project}}</h2>
+    </div>
+
+
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            
+            {% for i in pros %}
+            <!-- <div class="carousel-item"> -->
+            <div class="carousel-item text-center text-light mb-5 {% if forloop.first %} active{% endif %}">
+
+                <img src="{{i.imageURL}}" class="d-block w-100" alt="...">
+            </div>
+            {% endfor %}
+
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <div style="display: flex; justify-content: center;width: 70%;margin: auto;">
+    <p>{{project.description}}</p>
+</div>
+{% endblock %}
+
+        <!-- <script type="text/javascript" src="script.js"></script> -->
+        <script type="text/javascript">
+
+            let theme = localStorage.getItem('theme')
+            if (theme == null) {
+                setTheme('dark')
+            } else {
+                setTheme(theme)
+            }
+            let themeDots = document.getElementsByClassName('theme-dot')
+            for (var i = 0; themeDots.length > i; i++) {
+                themeDots[i].addEventListener('click', function () {
+                    let mode = this.dataset.mode
+                    setTheme(mode)
+                })
+            }
+            function setTheme(mode) {
+                if (mode == 'light') {
+                    document.getElementById('theme-style').href = '{% static "style.css" %}'
+                }
+                if (mode == 'dark') {
+                    document.getElementById('theme-style').href = '{% static "blue.css" %}'
+                }
+                if (mode == 'green') {
+                    document.getElementById('theme-style').href = '{% static "green.css" %}'
+                }
+                if (mode == 'purple') {
+                    document.getElementById('theme-style').href = '{% static "purple.css" %}'
+                }
+                localStorage.setItem('theme', mode)
+            }
+        </script>
+
+</body>
+
+</html>
