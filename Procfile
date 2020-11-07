@@ -1,1 +1,1 @@
-web: gunicorn resume.wsgi --log-file -
+web: python resume/manage.py collectstatic --noinput; bin/gunicorn_django --workers=4 --bind=0.0.0.0:$PORT resume/settings.py 
