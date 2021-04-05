@@ -9,6 +9,7 @@ from django.views.generic.edit import CreateView
 def index(request):
     projects=Project.objects.all()
     info=Info.objects.first()
+    
     skills=Skills.objects.all()
     if request.method == 'POST':
         form = contactForm(request.POST)
@@ -30,6 +31,8 @@ def allprojects(request):
     
     return render(request,'projects.html',{"projects":project1})
 
+def test(request):
+    return render(request,'test.html')
 
 def details(request,pk):
     try:

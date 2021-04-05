@@ -6,6 +6,7 @@ class Project(models.Model):
     info=models.CharField(max_length=200)
     description=models.CharField(max_length=1000,null=True)
     img_project=models.FileField()
+    img_logo=models.FileField()
     homePage=models.BooleanField(default=False)
 
     def __str__(self):
@@ -19,6 +20,12 @@ class Project(models.Model):
             url=''
         return url
 
+    def imagelogoURL(self):
+        try:
+            url=self.img_logo.url
+        except:
+            url=''
+        return url
 
 
 class imageProject(models.Model):
